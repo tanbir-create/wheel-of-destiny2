@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        #rules-page {
+    height: 100%;
+    width: 100%;
+    /* position: fixed; */
+    /* transform: translateX(100%); */
+    z-index: 8;
+    bottom: 0;
+    left: 0;
+    background-color: #ffffff;
+    overflow: hidden;
+    transition: transform .2s;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 150%;
+
+}
+#rules-page>div {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#rules-header {
+    display: flex;
+    align-items: center;
+    gap: 1.3rem;
+    padding: 1rem .5rem 1rem 0;
+    border-bottom: 1.1px solid #DDDDDD;;
+}
+
+#rules-header h2 {
+    font-size: 19px;
+    line-height: 150%;
+
+    text-align:center;
+    color: #222222;
+}
+
+#rules-header button {
+    background-color: transparent;
+    border: 0;
+}
+
+#rules-back {
+    display: flex;
+    justify-content: center;
+    width: 15%;
+    align-items: flex-start;
+}
+#rules-back-btn {
+    width: 100%;
+    text-align: start;
+}
+
+.purple-span {
+    color: #965efb;
+    font-weight: 600;
+}
+
+.the-rules {
+    margin-top: 1rem;
+}
+
+.the-rules > * + *{
+    margin-top: 1rem;
+}
+
+ul {
+    list-style-type: none;
+}
+
+ul > * + * {
+    margin-top: .5rem;
+}
+
+ul>li {
+    color: #965efb;
+    padding-left: 1rem;
+    font-weight: 600;
+}
+    </style>
+</head>
+<body>
+    <div id="rules-page">
+        <div>
+          <div id="rules-header">
+            <div id="rules-back">
+              <button id="rules-back-btn">
+                <svg
+                  width="11"
+                  height="19"
+                  viewBox="0 0 11 19"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M9.66897 1.73535L2.15459 9.4652C1.90793 9.71893 1.91249 10.1235 2.16481 10.3717L9.65246 17.7353"
+                    stroke="black"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                  />
+                </svg>
+              </button>
+            </div>
+  
+            <div>
+              <h2>Lucky Draw Qualifications</h2>
+            </div>
+          </div>
+  
+          <div class="the-rules">
+            <p>
+              Each independent user has
+              <span class="purple-span"
+                >5 lucky draw qualifications per day,</span
+              >
+              the first of which is a free lucky draw, and each lucky draw
+              qualification after that needs to invite a new user
+            </p>
+            <p>
+              After the new user registers the app, you can release the new lucky
+              draw
+            </p>
+  
+            <ul>
+              <h3 class="purple-span">Qualifications Prizes</h3>
+  
+              <li>Grand Prize: 100gems</li>
+              <li>First Prize: 80gems</li>
+  
+              <li>Second Prize: 50gems</li>
+              <li>Thrid Prize: 30gems</li>
+  
+              <li>Fourth Prize: 20gems</li>
+  
+              <li>Consolation Prize: 10gems</li>
+            </ul>
+  
+            <p>Event time: within one week after we launch the event</p>
+  
+            <p>
+              Organizer: Guruji team <br />
+              Activiry description: Click on the corresponding lottery option to
+              draw a lottery once a day for free, and draw upto five times a day.
+              Invited new friends can also participate in lottery after
+              registering.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <script>
+          const rulesBack = document.getElementById('rules-back-btn');
+            rulesBack.addEventListener('click', function() {
+
+                history.back();
+
+            })
+
+      </script>
+</body>
+</html>

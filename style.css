@@ -1,5 +1,4 @@
-
-    html,
+html,
     body {
       min-height: 100%;
       height: 100%;
@@ -8,6 +7,7 @@
     body {
       padding: 0;
       margin: 0;
+      overflow: hidden;
       /* height: 100vh;
     overflow: hidden;
     min-height: 100vh;
@@ -29,11 +29,95 @@
       color: #5e3996;
     }
 
+    #rules-div {
+      position: absolute;
+      top: 0;
+      /* left: -50px; */
+      width: 100%;
+      height: 30px;
+      background-color: transparent;
+      z-index: 4;
+      /* box-shadow: 0 35px 68px 0 rgba(170,63,254,0.42), inset 0 -10px 16px 0 #6500ae,inset 0 -5px 16px 0 black; */
+    }
 
-    
+    /* #rules-btn {
+
+          position: absolute;
+          left: 50%;
+          transform: translateX(-50%);
+          top: 0px;
+          height: 70px;
+          width: 80px;
+          
+          border-radius: 50%;
+          background-color: #840FD8;
+          z-index: 3;
+          box-shadow: 0 35px 68px 0 rgba(170,63,254,0.42), inset 0 -10px 16px 0 #6500ae,inset 0 -5px 16px 0 black;
+
+      }*/
+
+    #rules-opener {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: -25px;
+      height: 70px;
+      width: 90px;
+
+      border-radius: 50%;
+      background-color: transparent;
+      z-index: 3;
+
+      font-size: 20px;
+      font-style: italic;
+      font-weight: 500;
+      color: #ffffff;
+      /* text-align: center; */
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+    }
+
+    #back-btn {
+      position: absolute;
+      top: 3%;
+      left: 11px;
+      border: 0;
+      background-color: transparent;
+      height: 50px;
+      width: 50px;
+      z-index: 7;
+    }
+    button img {
+      max-width: 100%;
+    }
+
+    #music-btn {
+      position: absolute;
+      top: 3%;
+      right: 11px;
+      border: 0;
+      height: 50px;
+      width: 50px;
+      background-color: transparent;
+      z-index: 7;
+    }
+
+    .audio-paused::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 0;
+      height: 1.5px;
+      width: 98.9%;
+      transform: rotate(45deg);
+      background-color: #f9dba3;
+      z-index: 3;
+    }
+
     #heading {
       position: absolute;
-      top: 10%;
+      top: 4%;
     }
 
     #heading img {
@@ -97,14 +181,7 @@
       transform: translate(-50%, -50%);
     }
 
-    #canvas {
-      transition: 5s ease;
-      border-radius: 50%;
-      transform: rotate(-90deg);
-
-      z-index: -1;
-    }
-
+    
     #inner-shadow {
       position: absolute;
       height: 100%;
@@ -157,19 +234,17 @@
     }
 
     #wrapper1::before {
-
-      content: '';
+      content: "";
       position: absolute;
       bottom: -5%;
       left: 50%;
       transform: translateX(-50%);
       width: 60%;
       height: 8%;
-      background-color: rgba(0,0,0,.3);
+      background-color: rgba(0, 0, 0, 0.3);
       z-index: -2;
       filter: blur(6px);
       border-radius: 50%;
-
     }
 
     #wrapper2 {
@@ -403,4 +478,175 @@
       line-height: 140%;
       color: #3c0d9c;
       padding: 0.15rem 0.5rem;
+    }
+
+    #rules-div svg {
+      display: block;
+      max-width: fit-content;
+      filter: url(#inset-shadow) drop-shadow(0px 0px 5px rgba(0 0 0/0.3));
+    }
+
+    .overlay {
+      height: 100%;
+      width: 100%;
+      position: fixed;
+      transform: translateY(100%);
+      z-index: 8;
+      bottom: 0;
+      left: 0;
+      background-color: rgb(0, 0, 0);
+      background-color: rgba(0, 0, 0, 0.81);
+      background-color: rgba(17, 0, 40 / 0.7);
+      overflow: hidden;
+      /* transition: 0.25s; */
+    }
+
+    .overlay-content {
+      position: relative;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      height: 50%;
+      width: 80%;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: #5908d6;
+      border-radius: 12px;
+      border: 15px solid #781dff;
+      padding: 0.5rem;
+    }
+
+    .overlay-content2 {
+      background-color: #ffffff;
+      border: 0;
+    }
+
+    .overlay-pop-up {
+      animation: popUp ease-in-out 0.5s forwards;
+    }
+
+    @keyframes popUp {
+      0% {
+        transform: translateY(100%);
+      }
+
+      75% {
+        transform: translateY(-25px);
+      }
+      95% {
+        transform: translateY(12.5px);
+      }
+
+      100% {
+        transform: translateY(0);
+      }
+    }
+
+    /* .overlay-hide {
+      transition: transform ease-in-out .5s;
+      transform: translateY(100%);
+  } */
+
+    .overlay-content p {
+      font-weight: 600;
+      color: #ffffff;
+      margin-bottom: 1rem;
+      line-height: 150%;
+    }
+
+    #congrats {
+      font-size: 17px;
+    }
+
+    #prize-p {
+      font-size: 22px;
+    }
+
+    #prize,
+    #amount {
+      color: #ffd850;
+      font-weight: 400;
+    }
+
+    #share-p {
+      font-size: 13px;
+
+      background: #a265ff;
+      border-radius: 13px;
+      padding: 0.5rem 0.25rem;
+      width: 95%;
+    }
+
+    #share-btn {
+      background: linear-gradient(180deg, #ffe05e 0%, #ffbd31 100%);
+      border-radius: 80px;
+      height: 49px;
+      border: 0;
+      width: 95%;
+      font-weight: 600;
+      font-size: 17px;
+      line-height: 150%;
+      color: #3c0d9c;
+    }
+
+    .close-btn {
+      position: absolute;
+      bottom: 13%;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: transparent;
+      border: 0;
+      height: 55px;
+      width: 55px;
+    }
+
+    .close-btn img {
+      max-width: 100%;
+    }
+    #share {
+      position: absolute;
+      bottom: 20px;
+      height: 100px;
+      width: 100%;
+    }
+
+    #emoji {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      top: -93px;
+      height: 75px;
+      width: 75px;
+    }
+
+    #emoji img {
+      max-width: 100%;
+    }
+
+    .overlay-content2 p {
+      color: #222222;
+    }
+
+    #try-now {
+      color: #707070;
+      opacity: 0.84;
+      font-weight: 400;
+    }
+
+    #try-now-btn {
+      border: 0;
+      background-color: transparent;
+      text-decoration: underline;
+    }
+
+    #claim-now {
+      border: 1px solid #222222;
+      width: 90%;
+      background-color: transparent;
+      border-radius: 12px;
+      padding: 1rem;
+      margin-top: 2rem;
     }
