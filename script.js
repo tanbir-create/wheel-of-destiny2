@@ -93,6 +93,7 @@ function spinWheel() {
     let x = 1024;
     let y  = 9999;
     let degree = currentDegree + Math.floor(Math.random() * (y - x + 1))+y;
+    console.log(degree)
     currentDegree = degree;
     start.removeEventListener('click', spinWheel)
     /* Add event listener afterwards if the user gets spin chance after share on socials
