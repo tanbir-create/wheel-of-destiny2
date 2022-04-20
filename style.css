@@ -30,17 +30,7 @@
     }
 
 
-    #rules-div {
-
-        position: absolute;
-        top: 0;
-        width: 100%;
-        height: 20px;
-        background-color: #4e3de2;
-        z-index: 4;
-
-    }
-
+    
     #heading {
       position: absolute;
       top: 10%;

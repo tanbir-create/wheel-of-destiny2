@@ -20,6 +20,7 @@
     body {
       padding: 0;
       margin: 0;
+      overflow: hidden;
       /* height: 100vh;
     overflow: hidden;
     min-height: 100vh;
@@ -41,9 +42,59 @@
       color: #5e3996;
     }
 
+    #rules-div {
+      position: absolute;
+      top: 0;
+      /* left: -50px; */
+      width: 100%;
+      height: 30px;
+      background-color: transparent;
+      z-index: 4;
+      /* box-shadow: 0 35px 68px 0 rgba(170,63,254,0.42), inset 0 -10px 16px 0 #6500ae,inset 0 -5px 16px 0 black; */
+    }
+
+      /* #rules-btn {
+
+          position: absolute;
+          left: 50%;
+          transform: translateX(-50%);
+          top: 0px;
+          height: 70px;
+          width: 80px;
+          
+          border-radius: 50%;
+          background-color: #840FD8;
+          z-index: 3;
+          box-shadow: 0 35px 68px 0 rgba(170,63,254,0.42), inset 0 -10px 16px 0 #6500ae,inset 0 -5px 16px 0 black;
+
+      }*/
+
+      #rules-opener {
+        position: absolute;
+          left: 50%;
+          transform: translateX(-50%);
+          bottom: -25px;
+          height: 70px;
+          width: 90px;
+          
+          border-radius: 50%;
+          background-color: transparent;
+          z-index: 3;
+
+          font-size: 20px;
+          font-style: italic;
+          font-weight: 500;
+          color: #ffffff;
+          /* text-align: center; */
+          display: flex;
+          justify-content: center;
+          align-items: flex-end;
+        
+      } 
+
     #heading {
       position: absolute;
-      top: 10%;
+      top: 4%;
     }
 
     #heading img {
@@ -159,7 +210,7 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      height: 43%;
+      height: 42.5%;
       aspect-ratio: 1;
       background-image: linear-gradient(-90deg, #ffab16, #996506);
       border-radius: 50%;
@@ -167,19 +218,17 @@
     }
 
     #wrapper1::before {
-
-      content: '';
+      content: "";
       position: absolute;
       bottom: -5%;
       left: 50%;
       transform: translateX(-50%);
       width: 60%;
       height: 8%;
-      background-color: rgba(0,0,0,.3);
+      background-color: rgba(0, 0, 0, 0.3);
       z-index: -2;
       filter: blur(6px);
       border-radius: 50%;
-
     }
 
     #wrapper2 {
@@ -282,7 +331,7 @@
       animation: move_highlight 5s linear infinite;
     } */
     .spotlight_swivel {
-      /* animation: rotate_spotlight 5s ease-in-out infinite; */
+      animation: rotate_spotlight 5s ease-in-out infinite;
     }
     #sp1 .lamp {
       position: absolute;
@@ -367,7 +416,7 @@
     }
 
     #sp2 .spotlight_swivel {
-      /* animation: rotate_spotlight2 5s ease-in-out infinite; */
+      animation: rotate_spotlight2 5s ease-in-out infinite;
     }
     @keyframes rotate_spotlight2 {
       0% {
@@ -414,14 +463,76 @@
       color: #3c0d9c;
       padding: 0.15rem 0.5rem;
     }
+
+    
+
+    #rules-div svg {
+      display: block;
+      max-width: fit-content;
+      filter: url(#inset-shadow) drop-shadow(0px 0px 5px rgba(0 0 0/.3));
+    }
   </style>
   <body>
     <audio src="images/23.mp3" id="audio"></audio>
     <div id="app-container">
+      <div id="rules-div">
+        <div id="rules-opener">
+          
+            <p>Rules</p>
 
-    <div id="rules-div">
+        </div>
+        <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
+         viewBox="0 0 1441.000000 214.000000"
+        preserveAspectRatio="xMidYMid meet">
+        <filter id='inset-shadow'>
+          <!-- Shadow offset -->
+          <feOffset
+                  dx='0'
+                  dy='0'
+                />
+          <!-- Shadow blur -->
+        <feGaussianBlur
+                  stdDeviation='10'
+                  result='offset-blur'
+                />
+          <!-- Invert drop shadow to make an inset shadow-->
+          <feComposite
+                  operator='out'
+                  in='SourceGraphic'
+                  in2='offset-blur'
+                  result='inverse'
+                />
+          <!-- Cut colour inside shadow -->
+          <feFlood
+                  flood-color='black'
+                  flood-opacity='.95'
+                  result='color'
+                />
+          <feComposite
+                  operator='in'
+                  in='color'
+                  in2='inverse'
+                  result='shadow'
+                />
+          <!-- Placing shadow over element -->
+          <feComposite
+                  operator='over'
+                  in='shadow'
+                  in2='SourceGraphic'
+                /> 
+        </filter>
       
-    </div>
+       <g transform="translate(0.000000,214.000000) scale(0.100000,-0.100000)"
+       fill="#840FD8" stroke="none">
+       <path d="M0 1800 l0 -340 2298 -3 c2125 -2 2302 -4 2367 -20 245 -59 429 -156
+       633 -330 44 -38 198 -190 342 -338 144 -148 305 -306 358 -350 251 -209 498
+       -329 804 -391 102 -21 140 -23 388 -23 260 1 282 2 401 27 291 63 526 176 768
+       370 42 34 222 208 401 388 353 355 451 438 627 528 56 29 142 65 192 82 193
+       63 73 60 2565 60 l2266 0 0 340 0 340 -7205 0 -7205 0 0 -340z"/>
+       </g>
+       </svg>
+      </div>
+      
       <div id="sp1">
         <div class="stage_highlight"></div>
 
@@ -527,7 +638,6 @@
           title: "₹100",
         },
       ];
-      
 
       let canvas = document.getElementById("canvas");
       canvas.style.width = "100%";
@@ -670,7 +780,10 @@
         console.log(fontColor);
         ctx.fillStyle = fontColor;
         // ctx.font = "bold 21px";
-        ctx.font = ctx.font.replace(/\d+px/, `${window.innerHeight > 800 ? '30px' : '22px'}`);
+        ctx.font = ctx.font.replace(
+          /\d+px/,
+          `${window.innerHeight > 800 ? "30px" : "22px"}`
+        );
         // ctx.font = ctx.font.replace(/\d+px/, (parseInt(ctx.font.match(/\d+px/)) + 2) + "px");
 
         // ctx.fillText(text, 0, -radius + 120);
@@ -696,18 +809,18 @@
         ctx.restore();
       }
 
-      function wrapText  (ctx, text, x, y, maxWidth, lineHeight) {
+      function wrapText(ctx, text, x, y, maxWidth, lineHeight) {
         const words = text.split(" ");
-        
+
         let line = "";
         for (const [index, w] of words.entries()) {
           const testLine = line + w + " ";
           const metrics = ctx.measureText(testLine);
           const testWidth = metrics.width;
-          
+
           if (testWidth > maxWidth && index > 1) {
             ctx.fillText(line, x, y);
-            
+
             line = w + " ";
             y += lineHeight;
           } else {
@@ -716,7 +829,7 @@
         }
 
         ctx.fillText(line, x, y);
-      };
+      }
     </script>
   </body>
 </html>
