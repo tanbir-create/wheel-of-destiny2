@@ -1,253 +1,416 @@
-let start = document.getElementById('start');
-let shareDiv = document.getElementById('share')
+const rulesBtn = document.getElementById("rules-opener");
+rulesBtn.addEventListener("click", function () {
+  window.location.assign("rules.html");
+});
 
-let currentDegree = 0;
+const pianoSong = document.getElementById("piano-song");
+pianoSong.onLoad = pianoSong.play()
+pianoSong.loop = true;
 
-start.addEventListener('click',spinWheel)
-let prizeAnnounce = document.getElementById('prize-announce');
+const audioBtn = document.getElementById("music-btn");
+audioBtn.addEventListener("click", function () {
+  if (pianoSong.paused) {
+    pianoSong.play();
+    audioBtn.classList.remove("audio-paused");
+    return;
+  }
 
+  pianoSong.pause();
+  audioBtn.classList.add("audio-paused");
+});
 
+let wheel_prize_list = [
+  {
+    id: 1,
+    type: 0,
+    icon: "https://www.guruji.app/public/static/h5/wheel/ruppe.png",
+    title: "Try again",
+  },
+  {
+    id: 2,
+    type: 1,
+    icon: "https://www.guruji.app/public/static/h5/wheel/ruppe.png",
+    title: "₹5",
+  },
+  {
+    id: 3,
+    type: 2,
+    icon: "https://www.guruji.app/public/static/h5/wheel/coupon.png",
+    title: "200 get 250",
+  },
+  {
+    id: 4,
+    type: 1,
+    icon: "https://www.guruji.app/public/static/h5/wheel/ruppe.png",
+    title: "₹20",
+  },
+  {
+    id: 5,
+    type: 2,
+    icon: "https://www.guruji.app/public/static/h5/wheel/coupon.png",
+    title: "20% off",
+  },
+  {
+    id: 6,
+    type: 1,
+    icon: "https://www.guruji.app/public/static/h5/wheel/ruppe.png",
+    title: "₹80",
+  },
+  {
+    id: 7,
+    type: 2,
+    icon: "https://www.guruji.app/public/static/h5/wheel/coupon.png",
+    title: "50% off",
+  },
+  {
+    id: 8,
+    type: 1,
+    icon: "https://www.guruji.app/public/static/h5/wheel/ruppe.png",
+    title: "₹100",
+  },
+];
 
-let audio = document.querySelector('audio');
-
-let audioDiv = document.getElementById('audio-div');
-
-
-document.addEventListener("DOMContentLoaded", function() {
-    prizeAnnounce.innerHTML = `You have <span id="amount">${1}</span> chance`
-    /**
-     * 
-     * Chrome's autoplay policies are simple:
-
-Muted autoplay is always allowed.
-Autoplay with sound is allowed if:
-The user has interacted with the domain (click, tap, etc.).
-    */
-    
-
-//audio.play();
-  });
-
-
-let prize1 = document.querySelector('#spoke1 >div>div:nth-child(2)>span').textContent
-let prize2 = document.querySelector('#spoke2 >div>div:nth-child(2)>span').textContent
-let prize3 = document.querySelector('#spoke3 >div>div:nth-child(2)>span').textContent
-let prize4 = document.querySelector('#spoke4 >div>div:nth-child(2)>span').textContent
-let prize5 = document.querySelector('#spoke5 >div>div:nth-child(2)>span').textContent
-let prize6 = document.querySelector('#spoke6 >div>div:nth-child(2)>span').textContent
-let prize7 = document.querySelector('#spoke7 >div>div:nth-child(2)>span').textContent
-let prize8 = document.querySelector('#spoke8 >div>div:nth-child(2)>span').textContent
-
-
-
-//ranges to check which prize was won, each prize spoke has .125 arc space
-let rangeObject = {
-    firstPrize: {
-        min: .9376,
-        max: -.0625,
-        prize: prize1
-    },
-    secondPrize: {
-        min: .8126,
-        max: .9375,
-        prize: prize2
-    },
-    thirdPrize:{
-        min: .6876,
-        max: .8125,
-        prize: prize3
-    },
-    fourthPrize: {
-        min: .5626,
-        max: .6875,
-        prize: prize4
-    },
-    fifthPrize: {
-        min: .4376,
-        max: .5625,
-        prize: prize5
-    },
-    sixthPrize: {
-        min: .3126,
-        max: .4375,
-        prize: prize6
-    },
-    seventhPrize: {
-        min: .1876,
-        max: .3125,
-        prize: prize7
-    },
-    eightPrize: {
-        min: .0626,
-        max: .1875,
-        prize: prize8
-    }
-
-
-}
-
-
-
-
-function spinWheel() {
-    let x = 1024;
-    let y  = 9999;
-    let degree = currentDegree + Math.floor(Math.random() * (y - x + 1))+y;
-    console.log(degree)
-    currentDegree = degree;
-    start.removeEventListener('click', spinWheel)
-    /* Add event listener afterwards if the user gets spin chance after share on socials
-    start.addEventListener('click',spinWheel)
-    
-    setTimeout(() => {
-    }, 7000);
-    */
-    
-    document.querySelector('.wheel').style.transform = "rotate("+degree+"deg)"
-    let count = 0;
-    let t = setInterval(() => {
-        count++;
-        let orange = document.querySelectorAll('.o >span:nth-child(odd) .b ')
-        let white =  document.querySelectorAll('.o >span:nth-child(even) .b ')
-        if(count%2 == 1){
-          orange.forEach( node => node.style.backgroundColor = '#fff')
-          white.forEach(node => node.style.backgroundColor = "#ff8830")
-        }else{
-          orange.forEach(node => node.style.backgroundColor = '#ff8830')
-          white.forEach(node => node.style.backgroundColor = "#fff")
+let wheel_lottery_list = [
+  
+    {
+        "id": 1,
+        "create_time": 1650525000301,
+        "user_info": {
+            "id": 4,
+            "nickname": "dong"
+        },
+        "prize_info": {
+            "id": 1,
+            "title": "Failed to win the prize"
         }
-       
-        if(count === 14) {
-            clearInterval(t)
+    },
+    {
+        "id": 2,
+        "create_time": 1650525012569,
+        "user_info": {
+            "id": 4,
+            "nickname": "dong"
+        },
+        "prize_info": {
+            "id": 2,
+            "title": "&#8377;5"
         }
-    }, 500);
-}
-
-
-//pop up prize window after spin
-
-document.querySelector('.wheel').addEventListener('transitionend', function() {
-    
- 
-    
-   
-    let decimalPart = getDecimalPart(currentDegree/360);
- 
-    for (let key in rangeObject){
-
-
-        if(between(decimalPart, rangeObject[key].min,  rangeObject[key].max)){
-            console.log(rangeObject[key].prize)
-            document.getElementById('prize').textContent= rangeObject[key].prize
-            setTimeout(() => {
-               
-                document.getElementById('show-prize').classList.add('overlay-pop-up')
-                prizeAnnounce.innerHTML =`You have won <span id="amount">${rangeObject[key].prize}</span>`
-
-
-            }, 700);
-            break
+    },
+    {
+        "id": 3,
+        "create_time": 1650525015789,
+        "user_info": {
+            "id": 3,
+            "nickname": "kapil_v"
+        },
+        "prize_info": {
+            "id": 2,
+            "title": "&#8377;5"
         }
     }
+]
 
+let canvas = document.getElementById("canvas");
+canvas.style.width = "100%";
+canvas.style.height = "100%";
+window.innerHeight < 800
+  ? (window.devicePixelRatio = 1.95)
+  : (window.devicePixelRatio = 1.75);
+const scale = window.devicePixelRatio;
+canvas.width = Math.floor(canvas.offsetWidth * scale);
+canvas.height = Math.floor(canvas.offsetHeight * scale);
+let ctx = canvas.getContext("2d");
+let cw = canvas.width;
+let ch = canvas.height;
 
-    
-})
+let PI = Math.PI;
+let PI2 = PI * 2;
+;
+let sectorLength = 0;
 
+let i = 0;
+let currentTurns = 0;
+const audio = document.getElementById("audio");
 
-const rulesBtn = document.getElementById('rules-btn');
-const rulesPage = document.getElementById('rules-page')
-rulesBtn.addEventListener('click', function() {
-    rulesPage.style.transform = "translateX(0)"
-    //history.pushState({'page_id': 1}, '', 'index.html')
-})
+let sweep = 0;
+let cx = cw / 2;
+let cy = ch / 2;
+let radius = cw / 2;
 
-const rulesBack = document.getElementById('rules-back-btn');
-rulesBack.addEventListener('click', function() {
+let white = "white";
+let purple = "#7021e8";
+let w = true;
+ 
+const imgArr = [];
 
-    rulesPage.style.transform = "translateX(100%)"
+document.addEventListener('DOMContentLoaded', init);
 
-})
+async function init() {
 
+  //cant fetch data from api because blocked by cors policy , access control allow origin
+/*
+  const res = await fetch('https://api.guruji.app/Solar/Wheel/wheel_prize_list?user_id=1&rand_num=8');
+  const resJson = await res.json();
 
-function getDecimalPart(num) {
-    if (Number.isInteger(num)) {
-      return 0;
+   wheel_prize_list = resJson.data.wheel_prize_list;
+   wheel_lottery_list = resJson.data.wheel_lottery_list;
+  */
+  sectorLength = wheel_prize_list.length;
+  sweep = PI2 / sectorLength;
+  // console.log('sectorLength')
+
+  (function () {
+    let loaded = 0;
+  
+    function onLoad() {
+      loaded++;
+      if (loaded == wheel_prize_list.length) {
+        start();
+      }
     }
   
-    const decimalStr = "." + num.toString().split('.')[1];
-    return Number(decimalStr);
-}
-
-function between(x, min, max) {
-
-
-    if(x>=.9376 || x<=.0625) {
-        return true;
+    for (let i = 0; i < wheel_prize_list.length; i++) {
+      let img = new Image();
+      img.addEventListener("load", onLoad);
+      img.src = wheel_prize_list[i].icon;
+      img.onload = imgArr.push(img);
     }
-    return x >= min && x <= max;
-}
-
-function closeNav() {
-
-    start.innerText = `SHARE to check what is in your DESTINY again`
-    start.addEventListener('click', function() {
-        //share logic here
-
-    })
-    /*
-    if(e.target.parentElement.classList.contains('close-btn')){
-
-        document.getElementById('show-prize').classList.remove('overlay-pop-up')
-        return
-    }*/
-    document.getElementById('show-prize').classList.remove('overlay-pop-up')
+  })(wheel_prize_list, start);
+  loadWheelLotteryList(wheel_lottery_list)
+  
 
 }
 
+const winner1 = document.getElementById('winner1')
+const winner2 = document.getElementById('winner2')
+const winner3 = document.getElementById('winner3')
 
 
+function loadWheelLotteryList(wheel_lottery_list) {
+ 
+  const { length, [length - 3]:tl,[length - 2]: sl,[length - 1]: last} = wheel_lottery_list;
+ 
+  winner1.textContent = `${last.user_info.nickname} just got ${last.prize_info.title} ${Math.round((Date.now() - last.create_time)/60000)} mins ago`
+  winner2.textContent = `${sl.user_info.nickname} just got ${sl.prize_info.title} ${Math.round((Date.now() - sl.create_time)/60000)} mins ago`
+  winner3.textContent = `${tl.user_info.nickname} just got ${tl.prize_info.title} ${Math.round((Date.now() - tl.create_time)/60000)} mins ago`
+} 
 
-//AUudio
 
+function start() {
+  for (let i = 0; i < sectorLength; i++) {
+    let text = wheel_prize_list[i].title;
+   
+    let currBg = "";
+    let currFont = "";
 
-audioDiv.addEventListener('click', function() {
-
-    if(audio.paused) {
-        audio.play()
-        audioDiv.classList.remove('audio-paused')
-        return
+    if (w) {
+      currBg = "#FFE7B8";
+      currFont = "#7021E8";
+      w = false;
+    } else {
+      currBg = "#7021E8";
+      currFont = "white";
+      w = true;
     }
+    drawBlade(
+      imgArr[i],
+      text,
+      cx,
+      cy,
+      radius,
+      sweep * i,
+      sweep,
+      i,
+      currBg,
+      currFont
+    );
+  }
+}
 
-    audio.pause();
-    audioDiv.classList.add('audio-paused')
+function drawBlade(
+  img,
+  text,
+  cx,
+  cy,
+  radius,
+  angle,
+  arcsweep,
+  index,
+  bgColor,
+  fontColor
+) {
 
-})
+  ctx.save();
 
-const backBtnHome = document.getElementById('back-btn');
-const leaveDiv = document.getElementById('leave-div')
+  // rotate the canvas to this blade's angle
+  ctx.translate(cx, cy);
+  ctx.rotate(angle);
+  // draw the blade wedge
+  ctx.lineWidth = 0;
+  ctx.beginPath();
+  ctx.moveTo(0, 0);
+ 
+  ctx.arc(0, 0, radius, 0, arcsweep);
+  ctx.closePath();
 
-const claimNowBtn = document.getElementById('claim-now')
 
-claimNowBtn.addEventListener('click', closeNav2)
+  ctx.fillStyle = `${index === sectorLength - 1 ? bgColor : bgColor}`;
+ 
+  ctx.fill();
+
+  // draw the text
+  ctx.rotate(PI / 2 + sweep / 2);
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+  
+  ctx.fillStyle = fontColor;
+ 
+  ctx.font = ctx.font.replace(
+    /\d+px/,
+    `${window.innerHeight > 800 ? "26px" : "22px"}`
+  );
+ 
+  ctx.shadowColor = "black";
+  ctx.strokeStyle = "rgba(0,0,0,1)";
+  ctx.shadowBlur = 0;
+  ctx.shadowOffsetX = 0;
+  ctx.shadowOffsetY = 0;
+  const words = text.split(" ");
+  words.length > 2
+    ? wrapText(ctx, text, 0, -radius + 100, 60, 35)
+    : ctx.fillText(text, 0, -radius + 110);
+  ctx.shadowColor = "black";
+  ctx.shadowBlur = 10;
+  ctx.shadowOffsetX = 0;
+  ctx.shadowOffsetY = 0;
+ 
+  // draw the img
+ 
+  ctx.drawImage(img, -30, -radius + 21, 64, 64);
+
+  // restore the context to its original state
+  ctx.restore();
+}
+
+function wrapText(ctx, text, x, y, maxWidth, lineHeight) {
+  const words = text.split(" ");
+
+  let line = "";
+  for (const [index, w] of words.entries()) {
+    const testLine = line + w + " ";
+    const metrics = ctx.measureText(testLine);
+    const testWidth = metrics.width;
+
+    if (testWidth > maxWidth && index > 1) {
+      ctx.fillText(line, x, y);
+
+      line = w + " ";
+      y += lineHeight;
+    } else {
+      line = testLine;
+    }
+  }
+
+  ctx.fillText(line, x, y);
+}
+
+const startBtn = document.getElementById("start");
+startBtn.addEventListener("click", spin);
+
+let prizeObj = {};
+async function spin() {
+  //add it later if user has more spins left or got more after sharing
+
+  startBtn.removeEventListener("click", spin);
+  /*
+    api doesnt work due to cors policy for local server, Access control allow origin
+
+        const res = await fetch('https://api.guruji.app/Solar/Wheel/wheel_lottery_start');
+        const resJson = await res.json();
+
+        let spinResult = resJson.data.wheel_prize_info;
+
+
+*/
+
+  /*
+        
+            {
+    "data": {
+        "code": 0,
+        "msg": "ok!",
+        "wheel_prize_info": {
+            "id": 2,
+            "type": 1,
+            "icon": "https://www.guruji.app/public/static/h5/wheel/ruppe.png",
+            "title": "&#8377;5"
+        }
+    }
+}
+        
+        */
+       let spinResult = {
+           id: 2,
+           type: 1,
+           icon: "https://www.guruji.app/public/static/h5/wheel/ruppe.png",
+           title: "&#8377;5",
+        };
+        prizeObj = spinResult;
+
+  let num = spinResult.id;
+  currentTurns += 9000;
+  const pie = 360 / wheel_prize_list.length;
+  const rotation = (num - 0.5) * pie;
+  ctx.canvas.style.transform = `rotate(${-rotation - 90 + currentTurns}deg)`;
+}
+
+canvas.addEventListener('transitionend', showPrize);
+
+function showPrize() {
+
+    document.getElementById('prize').textContent= prizeObj.title
+
+    setTimeout(() => {
+               
+        document.getElementById('show-prize').classList.add('overlay-pop-up')
+        
+
+
+    }, 700);
+
+}
+
+const leaveDiv = document.getElementById("leave-div");
+
+document.getElementById("back-btn").addEventListener("click", function () {
+  leaveDiv.classList.add("overlay-pop-up");
+});
+
+const claimNowBtn = document.getElementById("claim-now");
+
+claimNowBtn.addEventListener("click", closeNav2);
+
+const closePrizeBtn = document.getElementById('prize-close');
+closePrizeBtn.addEventListener('click', closePrize);
+
+
+function closePrize(e) {
+
+  // if more spins available add event listener
+  // ***************************
+  startBtn.addEventListener('click', spin)
+
+  // ***************************
+  if(e.target.parentElement.classList.contains('close-btn')){
+
+      document.getElementById('show-prize').classList.remove('overlay-pop-up')
+      return
+  }
+  document.getElementById('show-prize').classList.remove('overlay-pop-up')
+
+}
+
 
 function closeNav2() {
-    
-
-    leaveDiv.classList.remove('overlay-pop-up')
-
+  leaveDiv.classList.remove("overlay-pop-up");
 }
-
-
-//function to GO BACK when the user wants to leave the entire page
-function goBack() {
-    //write logic here
-}
-
-
-backBtnHome.addEventListener('click', function() {
-    
-    leaveDiv.classList.add('overlay-pop-up')
-
-})
-

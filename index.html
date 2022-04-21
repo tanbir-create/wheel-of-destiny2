@@ -19,10 +19,11 @@
     </style>
     <link rel="preload" href="style.css" as="style" />
     <link rel="stylesheet" href="style.css" />
-    <script defer src="script2.js"></script>
+    <script defer src="script.js"></script>
   </head>
 
   <body>
+    <audio src="images/Your Happy Piano Song.mp3" id="piano-song"></audio>
     <audio src="images/23.mp3" id="audio"></audio>
     <div id="app-container">
       <div id="rules-div">
@@ -104,6 +105,13 @@
       </button>
 
       <div id="heading"><img src="images/headingAsset 4@4x.png" alt="" /></div>
+
+      <div id="prize-winners">
+        <p class="winners" id="winner1"></p>
+        <p class="winners" id="winner2"></p>
+        <p class="winners" id="winner3"></p>
+      </div>
+
       <div id="wrapper0">
         <div id="wrapper1">
           <div id="wrapper2">
@@ -132,8 +140,154 @@
         </div>
       </div>
 
+      <div id="prizes-won">
+        <p>
+          You have <span class="won" id="chances">3</span> times and Have got
+          <span class="won" id="gems-won">10 Gems</span>
+          <span id="coupons-won" class="won">3 Coupons</span>
+        </p>
+      </div>
+
       <div class="start-btn-container">
         <button id="start">WIN NOW</button>
+      </div>
+
+      <div id="show-prize" class="overlay">
+        <div id="you-get">You Get</div>
+
+        <svg
+        version="1.0"
+        xmlns="http://www.w3.org/2000/svg"
+       
+        viewBox="0 0 1117.000000 215.000000"
+        preserveAspectRatio="xMidYMid meet"
+      >
+      
+        <g
+          transform="translate(0.000000,215.000000) scale(0.100000,-0.100000)"
+          fill="#840FD8"
+          stroke="none"
+        >
+          <path
+            d="M5275 2139 c-204 -19 -404 -74 -582 -158 -237 -114 -349 -204 -743
+-600 -184 -186 -373 -367 -420 -403 -235 -182 -463 -272 -745 -293 -62 -5
+-490 -98 -1390 -302 -715 -162 -1321 -299 -1347 -304 -46 -10 -48 -12 -48 -45
+l0 -34 5585 0 5585 0 0 34 c0 29 -4 35 -27 40 -16 3 -665 140 -1443 305 -788
+166 -1453 302 -1500 306 -207 17 -341 54 -511 142 -175 90 -258 160 -599 502
+-334 336 -446 436 -602 538 -340 223 -750 315 -1213 272z"
+          />
+        </g>
+      </svg>
+        <div id="overlay-wrapper1">
+
+
+
+
+          <!--  -->
+
+              <div class="side-lights-bar1">
+
+                <div class="light"></div>
+                <div class="light"></div>
+                <div class="light"></div>
+                <div class="light"></div>
+                <div class="light"></div>
+                <div class="light"></div>
+                <div class="light"></div>
+                <div class="light"></div>
+                <div class="light"></div>
+                <div class="light"></div>
+                <div class="light"></div>
+                <div class="light"></div>
+                <div class="light"></div>
+                <div class="light"></div>
+                <div class="light"></div>
+
+              </div>
+
+              <div class="side-lights-bar2">
+
+                <div class="light"></div>
+                <div class="light"></div>
+                <div class="light"></div>
+                <div class="light"></div>
+                <div class="light"></div>
+                <div class="light"></div>
+                <div class="light"></div>
+                <div class="light"></div>
+                <div class="light"></div>
+                <div class="light"></div>
+                <div class="light"></div>
+                <div class="light"></div>
+                <div class="light"></div>
+                <div class="light"></div>
+                <div class="light"></div>
+                <div class="light"></div>
+                <div class="light"></div>
+                <div class="light"></div>
+
+              </div>
+
+              <div class="side-lights-bar3">
+
+                <div class="light"></div>
+                <div class="light"></div>
+                <div class="light"></div>
+                <div class="light"></div>
+                <div class="light"></div>
+                <div class="light"></div>
+                <div class="light"></div>
+                <div class="light"></div>
+                <div class="light"></div>
+                <div class="light"></div>
+                <div class="light"></div>
+                <div class="light"></div>
+                <div class="light"></div>
+                <div class="light"></div>
+                <div class="light"></div>
+                <div class="light"></div>
+                <div class="light"></div>
+                <div class="light"></div>
+
+              </div>
+
+              <div class="side-lights-bar4">
+
+                <div class="light"></div>
+                <div class="light"></div>
+                <div class="light"></div>
+                <div class="light"></div>
+                <div class="light"></div>
+                <div class="light"></div>
+                <div class="light"></div>
+                <div class="light"></div>
+                <div class="light"></div>
+                <div class="light"></div>
+                <div class="light"></div>
+                <div class="light"></div>
+                <div class="light"></div>
+                <div class="light"></div>
+                <div class="light"></div>
+
+              </div>
+
+
+          <!--  -->
+         
+          <div id="overlay-wrapper2">
+            <div class="overlay-content">
+              <p id="congrats">Congratulations!</p>
+              <p id="prize-p">
+                You have <span id="prize"></span> GEMS in your DESTINY
+              </p>
+              <p id="share-p">Share and know what is your friend’s DESTINY</p>
+              <button id="share-btn">Share</button>
+            </div>
+          </div>
+        </div>
+        <button class="close-btn" id="prize-close">
+          <img src="images/icon-close-popup.png" alt="" />
+        </button>
       </div>
 
       <div id="leave-div" class="overlay">
@@ -142,7 +296,7 @@
             <img src="images/guruji.png" alt="" />
           </div>
 
-          <h2>Sure you want to leave?</h2>
+          <h1>Sure you want to leave?</h1>
           <p id="try-now">
             10000+ clients have claimed the reward. Claim Upto MAXIMUM 100 GEMS
             <br />
@@ -151,7 +305,7 @@
           <button id="claim-now">CLAIM NOW</button>
         </div>
 
-        <button class="close-btn" onclick="goBack()">
+        <button class="close-btn">
           <img src="images/icon-close-popup.png" alt="" />
         </button>
       </div>
@@ -159,91 +313,3 @@
   </body>
 </html>
 
-<!-- <script>
-     
-
-      //const WHEEL_PRIZE_LIST_API = "https://api.guruji.app/solar/wheel/wheel_prize_list?user_id=5&rand_num=7"
-     
-
-      //cant fetch because  Access-Control-Allow-Origin is not sent 
-      // document.addEventListener("DOMContentLoaded", function () {
-      //   fetch("https://api.guruji.app/solar/wheel/wheel_prize_list?user_id=5&rand_num=7",{mode: 'no-cors'}).then(response => response.json()).then(resss=>console.log(resss)).catch(err => console.log(err))
-      // });
-      
-      const sectors = [
-        { color: "#f82", label: "Stack" },
-        { color: "#0bf", label: "10" },
-        { color: "#fb0", label: "200" },
-        { color: "#0fb", label: "50" },
-      ];
-
-      const rand = (m, M) => Math.floor(Math.random() * (M - m) + m);
-      const tot = sectors.length;
-      const EL_spin = document.querySelector("#spin");
-      const ctx = document.querySelector("#wheel").getContext("2d");
-      const dia = ctx.canvas.width;
-      const rad = dia / 2;
-      const PI = Math.PI;
-      const TAU = 2 * PI;
-      const arc = TAU / sectors.length;
-
-      const friction = 0.991; // 0.995=soft, 0.99=mid, 0.98=hard
-      let angVel = 0; // Angular velocity
-      let ang = 0; // Angle in radians
-
-      const getIndex = () => Math.floor(tot - (ang / TAU) * tot) % tot;
-
-      function drawSector(sector, i) {
-        const ang = arc * i;
-        ctx.save();
-        // COLOR
-        console.log(rad)
-        ctx.beginPath();
-        ctx.fillStyle = sector.color;
-        ctx.moveTo(rad, rad);
-        ctx.arc(rad, rad, rad, ang, ang + arc);
-        ctx.lineTo(rad, rad);
-        ctx.fill();
-        // TEXT
-        console.log("arc:" + arc)
-        ctx.translate(rad, rad);
-        // ctx.rotate(Math.PI*2/(i*sectors.length));
-        ctx.rotate(ang + arc/2);
-        ctx.textAlign = "center";
-        ctx.fillStyle = "#fff";
-        ctx.font = "bold 16px sans-serif";
-        ctx.fillText(sector.label, rad - 50, 10);
-        // ctx.translate(10, 10);
-
-        //
-        ctx.restore();
-      }
-
-      function rotate() {
-        const sector = sectors[getIndex()];
-        ctx.canvas.style.transform = `rotate(${ang - PI / 2}rad)`;
-        EL_spin.textContent = !angVel ? "SPIN" : sector.label;
-        EL_spin.style.background = "black";
-      }
-      function frame() {
-        if (!angVel) return;
-        angVel *= friction; // Decrement velocity by friction
-        if (angVel < 0.002) angVel = 0; // Bring to stop
-        ang += angVel; // Update angle
-        ang %= TAU; // Normalize angle
-        rotate();
-      }
-
-      function engine() {
-        frame();
-        requestAnimationFrame(engine);
-      }
-
-      // INIT
-      sectors.forEach(drawSector);
-      rotate(); // Initial rotation
-      engine(); // Start engine
-      EL_spin.addEventListener("click", () => {
-        if (!angVel) angVel = rand(25, 35);
-      });
-    </script> -->
