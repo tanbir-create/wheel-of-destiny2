@@ -68,21 +68,7 @@ body {
   /* box-shadow: 0 35px 68px 0 rgba(170,63,254,0.42), inset 0 -10px 16px 0 #6500ae,inset 0 -5px 16px 0 black; */
 }
 
-/* #rules-btn {
 
-          position: absolute;
-          left: 50%;
-          transform: translateX(-50%);
-          top: 0px;
-          height: 70px;
-          width: 80px;
-          
-          border-radius: 50%;
-          background-color: #840FD8;
-          z-index: 3;
-          box-shadow: 0 35px 68px 0 rgba(170,63,254,0.42), inset 0 -10px 16px 0 #6500ae,inset 0 -5px 16px 0 black;
-
-      }*/
 
 #rules-opener {
   position: absolute;
@@ -164,10 +150,11 @@ button img {
   top: 18%;
   left: 50%;
   transform: translateX(-50%);
-  width: fit-content;
+  width: 80%;
   color: #ffffff;
-  font-weight: 500;
-
+  font-size: 14px;
+  line-height: 140%;
+  text-align: center;
 }
 
 .winners {
@@ -185,12 +172,11 @@ button img {
   display: inline-block;
   position: relative;
   overflow: hidden;
-  /* display: none; */
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-image: url("images/zodiacAsset\ 1.png");
+  
 }
 
 #wheel {
@@ -257,26 +243,10 @@ button img {
     0px 0px 105px 0px rgba(0, 0, 0, 0.05) inset;
 }
 
-/* #wrapper0 {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      height: 50%;
-      aspect-ratio: 1;
-      background-image: url('images/zodiac\ signs.png');
-      background-color: rgba(255,255, 255,.1);
-      background-blend-mode: screen;
-      background-/blend-mode: color-dodge;
-      border-radius: 50%;
-      background-position: center;
-      background-size: 100%;
-      background-repeat: no-repeat;
-      
-    } */
+
 #wrapper1 {
   position: absolute;
-  top: 50%;
+  top: 53%;
   left: 50%;
   transform: translate(-50%, -50%);
   height: 43%;
@@ -348,7 +318,7 @@ button img {
   transform: translate(-50%, -50%);
   height: 98.55%;
   aspect-ratio: 1;
-  background-image: url("images/zodiacAsset\ 1@3x.png");
+  background-image: url("images/wrapper5.png");
   background-position: center;
   background-size: contain;
   border-radius: 50%;
@@ -385,20 +355,7 @@ button img {
   right: -5%;
   /* z-index: 2; */
 }
-/* .stage_highlight {
-      position: absolute;
-      top: 0;
-      left: 0;
-      height: 100%;
-      width: 20%;
-      overflow: hidden;
-      background-image: radial-gradient(
-        ellipse closest-side at 50% 82%,
-        rgb(84, 120, 173),
-        rgba(84, 120, 173, 0) 100%
-      );
-      animation: move_highlight 5s linear infinite;
-    } */
+
 .spotlight_swivel {
   animation: rotate_spotlight 5s ease-in-out infinite;
 }
@@ -502,9 +459,7 @@ button img {
     transform: rotate(0deg) scaleY(1) translateY(0);
   }
 }
-/* #wrapper4> span:nth-child(odd) .b{
-    background-color: #ff8830;
-} */
+
 
 
 #prizes-won {
