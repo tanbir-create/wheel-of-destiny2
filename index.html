@@ -19,12 +19,12 @@
     </style>
     <link rel="preload" href="style.css" as="style" />
     <link rel="stylesheet" href="style.css" />
+    
     <script defer src="script.js"></script>
   </head>
 
   <body>
-    <audio src="images/Your Happy Piano Song.mp3" id="piano-song"></audio>
-    <audio src="images/23.mp3" id="audio"></audio>
+    
     <div id="app-container">
       <div id="rules-div">
         <div id="rules-opener">
@@ -100,16 +100,14 @@
         <img src="images/back-btn.png" alt="" />
       </button>
 
-      <button id="music-btn">
+      <button id="music-btn" class="audio-paused">
         <img src="images/music-btn.png" alt="" />
       </button>
 
       <div id="heading"><img src="images/headingAsset 4@4x.png" alt="" /></div>
 
       <div id="prize-winners">
-        <p class="winners" id="winner1"></p>
-        <p class="winners" id="winner2"></p>
-        <p class="winners" id="winner3"></p>
+        <div id="prize-wrap"></div>
       </div>
 
       <div id="wrapper0">
@@ -310,6 +308,11 @@ l0 -34 5585 0 5585 0 0 34 c0 29 -4 35 -27 40 -16 3 -665 140 -1443 305 -788
         </button>
       </div>
     </div>
+  
+
+    <audio src="images/Your Happy Piano Song.mp3" id="piano-song" ></audio>
+    <audio src="images/23.mp3" id="audio" preload="auto"></audio>
+   
   </body>
 </html>
 

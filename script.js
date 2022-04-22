@@ -1,14 +1,21 @@
+//start spin button
 const startBtn = document.getElementById("start");
+const WHEEL_PRIZE_LIST_API = `https://api.guruji.app/Solar/Wheel/wheel_prize_list?user_id=1&rand_num=8`;
+const WHEEL_LOTTERY_START_API = `https://api.guruji.app/Solar/Wheel/wheel_lottery_start?user_id=8`;
 
+//rules button, on click open rules page
 const rulesBtn = document.getElementById("rules-opener");
 rulesBtn.addEventListener("click", function () {
   window.location.assign("rules.html");
 });
 
-const pianoSong = document.getElementById("piano-song");
-pianoSong.onLoad = pianoSong.play();
-pianoSong.loop = true;
 
+//piano music and function to play/pause music
+const pianoSong = document.getElementById("piano-song");
+
+
+
+pianoSong.loop = true;
 const audioBtn = document.getElementById("music-btn");
 audioBtn.addEventListener("click", function () {
   if (pianoSong.paused) {
@@ -21,14 +28,19 @@ audioBtn.addEventListener("click", function () {
   audioBtn.classList.add("audio-paused");
 });
 
+
+//initialize wheel prize list and use prize list to fetch later from api and use
 let wheel_prize_list = [];
 
 let wheel_lottery_list = [];
 let user_prize_info = {};
 
+
 let canvas = document.getElementById("canvas");
 canvas.style.width = "100%";
 canvas.style.height = "100%";
+
+//for text clarity
 window.innerHeight < 800
   ? (window.devicePixelRatio = 1.95)
   : (window.devicePixelRatio = 1.75);
@@ -46,6 +58,8 @@ let sectorLength = 0;
 
 let i = 0;
 let currentTurns = 0;
+
+//audio while wheel is spinning
 const audio = document.getElementById("audio");
 
 let sweep = 0;
@@ -63,12 +77,13 @@ const chances = document.getElementById("chances");
 const gems_won = document.getElementById("gems-won");
 const coupons_won = document.getElementById("coupons-won");
 
+
+//entry point
 document.addEventListener("DOMContentLoaded", init);
 
+
 async function init() {
-  const res = await fetch(
-    "https://api.guruji.app/Solar/Wheel/wheel_prize_list?user_id=1&rand_num=8"
-  );
+  const res = await fetch(WHEEL_PRIZE_LIST_API);
   const resJson = await res.json();
 
   wheel_prize_list = resJson.data.wheel_prize_list;
@@ -77,20 +92,26 @@ async function init() {
 
   const { times, gem_total, coupon_num } = user_prize_info;
 
+
+  //if the user has spins left then let them spin the wheel by adding event listener to button
   if (times > 0) {
     startBtn.addEventListener("click", spin);
   } else {
     startBtn.innerText = "Share to check what is in your destiny again";
   }
 
+
+  //change text for the avaiable prizes and times left
   chances.innerText = times + " times";
   gems_won.innerText = gem_total + " Gems";
   coupons_won.innerText = coupon_num + " Coupons";
 
+  //set sector length according to the wheel prize list length to set how many blades to draw in canvas
   sectorLength = wheel_prize_list.length;
   sweep = PI2 / sectorLength;
-  // console.log('sectorLength')
+ 
 
+  //IIFE to load images and start loading canvas
   (function () {
     let loaded = 0;
 
@@ -102,6 +123,7 @@ async function init() {
       }
     }
 
+    //loop through all images and load them before painting them in canvas
     for (let i = 0; i < wheel_prize_list.length; i++) {
       let img = new Image();
       img.addEventListener("load", onLoad);
@@ -110,44 +132,100 @@ async function init() {
     }
   })(wheel_prize_list, start);
 
+ 
   loadWheelLotteryList(wheel_lottery_list);
 
-  t = setInterval(() => {
-    loadWheelLotteryList();
-  }, 6000);
 }
 
-const winner1 = document.getElementById("winner1");
-const winner2 = document.getElementById("winner2");
-const winner3 = document.getElementById("winner3");
+let slideUpInPixels = 19.6;
+let first = 2, second = 3, third = 4;
 
-async function loadWheelLotteryList(wheel_lottery_list) {
-  if (wheel_lottery_list === undefined) {
-    const res = await fetch(
-      "https://api.guruji.app/Solar/Wheel/wheel_prize_list?user_id=1&rand_num=8"
-    );
-    const resJson = await res.json();
-    wheel_lottery_list = resJson.data.wheel_lottery_list;
+
+function loadWheelLotteryList(wheel_lottery_list) {
+
+  //load 90 elements from prizelist inside prize winners div
+  const length = wheel_lottery_list.length > 90 ? 90 : wheel_lottery_list.length;
+
+  const prizeDiv = document.getElementById('prize-wrap');
+
+  let fragment = document.createDocumentFragment();
+  for(let i = length-1; i>=0; i--) {
+
+    let ptag = document.createElement("p");
+    ptag.textContent = winnersText(wheel_lottery_list[i]); 
+    fragment.appendChild(ptag);
+
   }
 
-  const {
-    length,
-    [length - 3]: tl,
-    [length - 2]: sl,
-    [length - 1]: last,
-  } = wheel_lottery_list;
+  //add the 90elements in the prize div to use scroll animations
+  prizeDiv.appendChild(fragment)
 
-  winner1.textContent = winnersText(last);
-  winner2.textContent = winnersText(sl);
-  winner3.textContent = winnersText(tl);
+
+  //each 6 seconds the prizediv will slide up and show the next item form preloaded prize winners list
+  //overflow is hidden in prize winners div to show only 3 items in it
+  t = setInterval(() => {
+
+    //select the next 3 elements which will slide and change their opacity
+
+    let firstWinner = document.querySelector(`#prize-wrap p:nth-child(${first})`);
+    let secondWinner = document.querySelector(`#prize-wrap p:nth-child(${second})`);
+    let thirdWinner = document.querySelector(`#prize-wrap p:nth-child(${third})`);
+
+
+    prizeDiv.style.transform = `translateY(-${slideUpInPixels}px)`;
+    slideUpInPixels+=19.6;
+ 
+    firstWinner.style.opacity = '1';
+    secondWinner.style.opacity = '.8';
+    thirdWinner.style.opacity = '0.6'
+    first++;
+    second++;
+    third++;
+
+    //if reached start of array stop scrolling
+    if(first === length - 4) {
+      clearInterval(t);
+    }
+  }, 6000);
+  
 }
+
 
 function winnersText(winner) {
   return `${winner.user_info.nickname} just got ${
-    winner.prize_info.title
-  } ${Math.round((Date.now() - winner.create_time) / 60000)} mins ago`;
+    winner.prize_info.id === 1 ? '₹5' : winner.prize_info.title
+  } ${getTime(winner.create_time)} ago`;
 }
 
+function getTime(time) {
+
+  let difference = Date.now() - time;
+
+  const oneDay = 86400000;
+  const oneHour = 3600000;
+  const oneMinute = 60000;
+  if(difference >= oneDay) {
+    const calculatedTime = Math.round((difference) / oneDay );
+    const days = calculatedTime === 1 ? calculatedTime + ' day' : calculatedTime + ' days'
+    return days;
+  }
+  else if(difference >= oneHour) {
+    const calculatedTime = Math.round((difference) / oneHour );
+    const hours = calculatedTime === 1 ? calculatedTime + ' hour' : calculatedTime + ' hours'
+    return hours;
+  }
+  else if (difference >= oneMinute) {
+    const calculatedTime = Math.round((difference) / oneMinute );
+    const mins = calculatedTime === 1 ? calculatedTime + ' min' : calculatedTime + ' mins'
+    return mins;
+  }
+  
+  return '0 min'
+
+}
+
+
+//function to loop through all the prizes in list and draw the image and text accordingly
 function start() {
   for (let i = 0; i < sectorLength; i++) {
     let text = wheel_prize_list[i].title;
@@ -155,6 +233,7 @@ function start() {
     let currBg = "";
     let currFont = "";
 
+    //set background and font color for current spoke of the wheel
     if (w) {
       currBg = "#FFE7B8";
       currFont = "#7021E8";
@@ -164,6 +243,8 @@ function start() {
       currFont = "white";
       w = true;
     }
+
+    
     drawBlade(
       imgArr[i],
       text,
@@ -179,6 +260,8 @@ function start() {
   }
 }
 
+
+//function to draw one spoke of the wheel using all params provided
 function drawBlade(
   img,
   text,
@@ -204,7 +287,7 @@ function drawBlade(
   ctx.arc(0, 0, radius, 0, arcsweep);
   ctx.closePath();
 
-  ctx.fillStyle = `${index === sectorLength - 1 ? bgColor : bgColor}`;
+  ctx.fillStyle = bgColor;
 
   ctx.fill();
 
@@ -215,6 +298,7 @@ function drawBlade(
 
   ctx.fillStyle = fontColor;
 
+  //if mobile screen smaller than 800px then change text font size
   ctx.font = ctx.font.replace(
     /\d+px/,
     `${window.innerHeight > 800 ? "26px" : "22px"}`
@@ -225,23 +309,30 @@ function drawBlade(
   ctx.shadowBlur = 0;
   ctx.shadowOffsetX = 0;
   ctx.shadowOffsetY = 0;
+
+  //if title of prize is longer than 3 words then make multi line text for the title for canvas using wraptext function
   const words = text.split(" ");
-  words.length > 2
-    ? wrapText(ctx, text, 0, -radius + 100, 60, 35)
-    : ctx.fillText(text, 0, -radius + 110);
+  words.length > 3
+    ? wrapText(ctx, text, 0, -radius + 40, 60, 35)
+    : ctx.fillText(text, 0, -radius + 40);
+
+  //shadow for image
   ctx.shadowColor = "black";
-  ctx.shadowBlur = 10;
+  ctx.shadowBlur = 7;
   ctx.shadowOffsetX = 0;
   ctx.shadowOffsetY = 0;
 
-  // draw the img
+  //draw the img
 
-  ctx.drawImage(img, -30, -radius + 21, 64, 64);
+  //image height width set to 64/64px
+  ctx.drawImage(img, -30, -radius + 65, 70, 70);
 
-  // restore the context to its original state
+  //restore the context to its original state
   ctx.restore();
 }
 
+
+//function for multiline text title
 function wrapText(ctx, text, x, y, maxWidth, lineHeight) {
   const words = text.split(" ");
 
@@ -251,6 +342,7 @@ function wrapText(ctx, text, x, y, maxWidth, lineHeight) {
     const metrics = ctx.measureText(testLine);
     const testWidth = metrics.width;
 
+    //change line after first two words
     if (testWidth > maxWidth && index > 1) {
       ctx.fillText(line, x, y);
 
@@ -264,21 +356,17 @@ function wrapText(ctx, text, x, y, maxWidth, lineHeight) {
   ctx.fillText(line, x, y);
 }
 
+
+//spin function after the start button is clicked
 let prizeObj = {};
 async function spin() {
-  startBtn.removeEventListener("click", spin);
-  if (t) {
-    clearInterval(t);
-    setTimeout(() => {
-      t = setInterval(() => {
-        loadWheelLotteryList();
-      }, 6000);
-    }, 5000);
-  }
+  //remove event listener so that user doesnt spin the wheel while its spinning
+  audio.play();
 
-  const res = await fetch(
-    "https://api.guruji.app/Solar/Wheel/wheel_lottery_start?user_id=2"
-  );
+  startBtn.removeEventListener("click", spin);
+
+  //fetch user's lottery result
+  const res = await fetch(WHEEL_LOTTERY_START_API);
   const resJson = await res.json();
 
   let spinResult = resJson.data.wheel_prize_info;
@@ -287,12 +375,15 @@ async function spin() {
 
   let num = spinResult.id;
   currentTurns += 9000;
+
+  //spin the wheel upto the prize part after 25 rotations
   const pie = 360 / wheel_prize_list.length;
   const rotation = (num - 0.5) * pie;
-  audio.play();
   ctx.canvas.style.transform = `rotate(${-rotation - 90 + currentTurns}deg)`;
 }
 
+
+//after the wheel stops spinning call showprize function after .7seconds and show the prize container to the user
 canvas.addEventListener("transitionend", showPrize);
 
 function showPrize() {
@@ -303,12 +394,16 @@ function showPrize() {
   }, 700);
 }
 
+
+//if the user presses back button show the 'sure you want to leave div'
 const leaveDiv = document.getElementById("leave-div");
 
 document.getElementById("back-btn").addEventListener("click", function () {
   leaveDiv.classList.add("overlay-pop-up");
 });
 
+
+//if they press claim now remove the leave div and show the wheel page again
 const claimNowBtn = document.getElementById("claim-now");
 
 claimNowBtn.addEventListener("click", closeNav2);
@@ -316,17 +411,16 @@ claimNowBtn.addEventListener("click", closeNav2);
 const closePrizeBtn = document.getElementById("prize-close");
 closePrizeBtn.addEventListener("click", closePrize);
 
-function closePrize(e) {
-  // if more spins available add event listener
-  // ***************************
 
-  // ***************************
+//after the user sees prize and closes it, reload the page
+function closePrize(e) {
+  
   if (e.target.parentElement.classList.contains("close-btn")) {
-    // document.getElementById('show-prize').classList.remove('overlay-pop-up')
+    
     window.location.reload();
     return;
   }
-  document.getElementById("show-prize").classList.remove("overlay-pop-up");
+  window.location.reload();
 }
 
 function closeNav2() {
