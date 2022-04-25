@@ -184,15 +184,15 @@ function getTime(time) {
 
   let difference = Date.now() - time;
 
-  const oneDay = 86400000;
-  const oneHour = 3600000;
-  const oneMinute = 60000;
+  const oneDay = 86400000 - 1;
+  const oneHour = 3600000 - 1;
+  const oneMinute = 60000 - 1;
   if(difference >= oneDay) {
     const calculatedTime = Math.round((difference) / oneDay );
     const days = calculatedTime === 1 ? calculatedTime + ' day' : calculatedTime + ' days'
     return days;
   }
-  else if(difference >= oneHour) {
+  else if(difference > oneHour) {
     const calculatedTime = Math.round((difference) / oneHour );
     const hours = calculatedTime === 1 ? calculatedTime + ' hour' : calculatedTime + ' hours'
     return hours;
