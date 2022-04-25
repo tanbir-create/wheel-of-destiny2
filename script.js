@@ -97,7 +97,9 @@ async function init() {
   if (times > 0) {
     startBtn.addEventListener("click", spin);
   } else {
-    startBtn.innerText = "Share to check what is in your destiny again";
+    //add share logic here and add startBtn text 'Shared! know your destiny now ' after the user shared 
+
+    startBtn.innerText = "Share to get another chance";
   }
 
 
@@ -170,8 +172,10 @@ function loadWheelLotteryList(wheel_lottery_list) {
 
 
 function winnersText(winner) {
-  return `${(winner.user_info.nickname).substring(0, 5) + '****'} just got ${
-   winner.prize_info.title
+  
+  
+  let text = `${(winner.user_info.nickname).substring(0, 5) + '****'} just got ${
+   winner.prize_info.id === 1 ? 'please try again' : winner.prize_info.title
   } ${getTime(winner.create_time * 1000)} ago`;
 }
 
