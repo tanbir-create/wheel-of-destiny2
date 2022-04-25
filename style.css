@@ -147,7 +147,7 @@ button img {
 #prize-wrap{
   /* height: inherit; */
   /* transition: transform 1s ease-out; */
-  animation: scrollDiv linear infinite;
+  /* animation: scrollDiv linear infinite; */
   
 
 }
@@ -176,7 +176,9 @@ button img {
   height: 62px;
   overflow: hidden;
 
-
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
 }
 
 @keyframes scrollDiv {

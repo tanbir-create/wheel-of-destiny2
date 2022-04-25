@@ -162,7 +162,22 @@ function loadWheelLotteryList(wheel_lottery_list) {
   //add the 90elements in the prize div to use scroll animations
   prizeDiv.appendChild(fragment)
 
-  document.getElementById('prize-wrap').style.animationDuration = length * 2 + 's';
+  // document.getElementById('prize-wrap').style.animationDuration = length * 2 + 's';
+
+  $('#prize-winners').easyTicker({
+    direction: 'up',
+    easing: 'swing',
+    speed: 'medium',
+    interval: 4000,
+    height: '60px',
+    visible: 0,
+    mousePause: false,
+   
+    callbacks: {
+        before: false,
+        after: false
+    }
+});
   
 
 
