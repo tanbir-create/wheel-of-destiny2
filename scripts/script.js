@@ -1,4 +1,4 @@
-//start spin button
+ //start spin button
 const startBtn = document.getElementById("start");
 const WHEEL_PRIZE_LIST_API = `https://api.guruji.app/Solar/Wheel/wheel_prize_list?user_id=1&rand_num=8`;
 const WHEEL_LOTTERY_START_API = `https://api.guruji.app/Solar/Wheel/wheel_lottery_start?user_id=8`;
@@ -167,7 +167,7 @@ function loadWheelLotteryList(wheel_lottery_list) {
   $('#prize-winners').easyTicker({
     direction: 'up',
     easing: 'swing',
-    speed: 'medium',
+    speed: 'slow',
     interval: 4000,
     height: '60px',
     visible: 0,
