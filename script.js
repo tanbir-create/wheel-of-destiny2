@@ -175,8 +175,9 @@ function winnersText(winner) {
   
   
   let text = `${(winner.user_info.nickname).substring(0, 5) + '****'} just got ${
-   winner.prize_info.id === 1 ? 'please try again' : winner.prize_info.title
+   winner.prize_info.title
   } ${getTime(winner.create_time * 1000)} ago`;
+  return text
 }
 
 function getTime(time) {
