@@ -144,12 +144,12 @@ let first = 2, second = 3, third = 4;
 function loadWheelLotteryList(wheel_lottery_list) {
 
   //load 90 elements from prizelist inside prize winners div
-  const length = wheel_lottery_list.length > 90 ? 90 : wheel_lottery_list.length;
+  const length = wheel_lottery_list.length;
 
   const prizeDiv = document.getElementById('prize-wrap');
 
   let fragment = document.createDocumentFragment();
-  for(let i = length-1; i>=0; i--) {
+  for(let i = 0; i<length; i++) {
 
     let ptag = document.createElement("p");
     ptag.textContent = winnersText(wheel_lottery_list[i]); 
@@ -163,37 +163,60 @@ function loadWheelLotteryList(wheel_lottery_list) {
 
   //each 6 seconds the prizediv will slide up and show the next item form preloaded prize winners list
   //overflow is hidden in prize winners div to show only 3 items in it
-  t = setInterval(() => {
+  if(length > 3) {
+    t = setInterval(() => {
 
-    //select the next 3 elements which will slide and change their opacity
+      //select the next 3 elements which will slide and change their opacity
+  
+      let firstWinner = document.querySelector(`#prize-wrap p:nth-child(${first})`);
+      let secondWinner = document.querySelector(`#prize-wrap p:nth-child(${second})`);
+      let thirdWinner = document.querySelector(`#prize-wrap p:nth-child(${third})`);
+  
+  
+      prizeDiv.style.transform = `translateY(-${slideUpInPixels}px)`;
+      slideUpInPixels+=19.6;
+   
+      firstWinner.style.opacity = '1';
+      secondWinner.style.opacity = '.8';
+      thirdWinner.style.opacity = '0.6'
+      first++;
+      second++;
+      third++;
+  
+      //if reached start of array loop
+      if(first === length - 4) {
+        prizeDiv.style.transform = `translateY(0)`
+        first = 2;
+        second = 3;
+        third = 4;
+      }
+    }, 6000);
+  }else {
+    t = setInterval(() => {
 
-    let firstWinner = document.querySelector(`#prize-wrap p:nth-child(${first})`);
-    let secondWinner = document.querySelector(`#prize-wrap p:nth-child(${second})`);
-    let thirdWinner = document.querySelector(`#prize-wrap p:nth-child(${third})`);
-
-
-    prizeDiv.style.transform = `translateY(-${slideUpInPixels}px)`;
-    slideUpInPixels+=19.6;
- 
-    firstWinner.style.opacity = '1';
-    secondWinner.style.opacity = '.8';
-    thirdWinner.style.opacity = '0.6'
-    first++;
-    second++;
-    third++;
-
-    //if reached start of array stop scrolling
-    if(first === length - 4) {
-      clearInterval(t);
-    }
-  }, 6000);
+      //select the next 3 elements which will slide and change their opacity
+  
+     
+  
+  
+      prizeDiv.style.transform = `translateY(-${slideUpInPixels}px)`;
+      slideUpInPixels+=19.6;
+   
+      
+  
+      //if reached start of array loop
+      if(slideUpInPixels >= 39) {
+        prizeDiv.style.transform = `translateY(0)`;
+      }
+    }, 6000);
+  }
   
 }
 
 
 function winnersText(winner) {
   return `${winner.user_info.nickname} just got ${
-    winner.prize_info.id === 1 ? '₹5' : winner.prize_info.title
+   winner.prize_info.title
   } ${getTime(winner.create_time)} ago`;
 }
 
