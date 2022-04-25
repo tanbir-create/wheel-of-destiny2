@@ -39,7 +39,7 @@ body {
 	height: 100%;
 	top: 0;
 	left: 0;
-  background-image: url("images/final255Asset\ 5@4x-100.jpg")
+  background-image: url("images/main-background.jpg")
 ;
   /* background-blend-mode: luminosity; */
   background-position: center;
@@ -145,17 +145,22 @@ button img {
   filter: contrast(120%);
 }
 #prize-wrap{
-  height: inherit;
-  transition: transform 1s ease-out;
+  /* height: inherit; */
+  /* transition: transform 1s ease-out; */
+  animation: scrollDiv linear infinite;
+  
+
 }
 
-#prize-wrap p:nth-child(2){
+
+
+/* #prize-wrap p:nth-child(2){
   opacity: .7;
 }
 
 #prize-wrap p:nth-child(3) {
   opacity: .5;
-}
+} */
 
 #prize-winners {
 
@@ -170,7 +175,21 @@ button img {
   text-align: center;
   height: 62px;
   overflow: hidden;
+
+
 }
+
+@keyframes scrollDiv {
+  
+
+  to {
+    transform: translateY(calc(-100%  + 62px));
+  }
+  
+
+}
+
+
 
 .winners {
   margin-top: .2rem;
@@ -215,7 +234,7 @@ button img {
 
   border-radius: 50%;
   /* box-shadow: 0 0 3px rgba(0, 0, 0, 0.6); */
-  background-image: url("images/Untitled.png");
+  background-image: url("images/spin-arrow-middle.png");
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
@@ -223,7 +242,7 @@ button img {
 
 #spin-wrapper {
   position: absolute;
-  background-image: url("images/zodiachfhAsset\ 1@3x.png");
+  background-image: url("images/spin-arrow-border.png");
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
@@ -333,7 +352,7 @@ button img {
   transform: translate(-50%, -50%);
   height: 98.55%;
   aspect-ratio: 1;
-  background-image: url("images/wrapper5.png");
+  background-image: url("images/wrapper5-background.png");
   background-position: center;
   background-size: contain;
   border-radius: 50%;

@@ -160,64 +160,19 @@ function loadWheelLotteryList(wheel_lottery_list) {
   //add the 90elements in the prize div to use scroll animations
   prizeDiv.appendChild(fragment)
 
+  document.getElementById('prize-wrap').style.animationDuration = length * 2 + 's';
+  
 
-  //each 6 seconds the prizediv will slide up and show the next item form preloaded prize winners list
-  //overflow is hidden in prize winners div to show only 3 items in it
-  if(length > 3) {
-    t = setInterval(() => {
 
-      //select the next 3 elements which will slide and change their opacity
-  
-      let firstWinner = document.querySelector(`#prize-wrap p:nth-child(${first})`);
-      let secondWinner = document.querySelector(`#prize-wrap p:nth-child(${second})`);
-      let thirdWinner = document.querySelector(`#prize-wrap p:nth-child(${third})`);
-  
-  
-      prizeDiv.style.transform = `translateY(-${slideUpInPixels}px)`;
-      slideUpInPixels+=19.6;
-   
-      firstWinner.style.opacity = '1';
-      secondWinner.style.opacity = '.8';
-      thirdWinner.style.opacity = '0.6'
-      first++;
-      second++;
-      third++;
-  
-      //if reached start of array loop
-      if(first === length - 4) {
-        prizeDiv.style.transform = `translateY(0)`
-        first = 2;
-        second = 3;
-        third = 4;
-      }
-    }, 6000);
-  }else {
-    t = setInterval(() => {
-
-      //select the next 3 elements which will slide and change their opacity
-  
-     
-  
-  
-      prizeDiv.style.transform = `translateY(-${slideUpInPixels}px)`;
-      slideUpInPixels+=19.6;
-   
-      
-  
-      //if reached start of array loop
-      if(slideUpInPixels >= 39) {
-        prizeDiv.style.transform = `translateY(0)`;
-      }
-    }, 6000);
-  }
+ 
   
 }
 
 
 function winnersText(winner) {
-  return `${winner.user_info.nickname} just got ${
+  return `${(winner.user_info.nickname).substring(0, 5) + '****'} just got ${
    winner.prize_info.title
-  } ${getTime(winner.create_time)} ago`;
+  } ${getTime(winner.create_time * 1000)} ago`;
 }
 
 function getTime(time) {
@@ -341,14 +296,14 @@ function drawBlade(
 
   //shadow for image
   ctx.shadowColor = "black";
-  ctx.shadowBlur = 7;
+  ctx.shadowBlur = 5;
   ctx.shadowOffsetX = 0;
   ctx.shadowOffsetY = 0;
 
   //draw the img
 
   //image height width set to 64/64px
-  ctx.drawImage(img, -30, -radius + 65, 70, 70);
+  ctx.drawImage(img, -30, -radius + 65, 60, 60);
 
   //restore the context to its original state
   ctx.restore();
@@ -410,7 +365,21 @@ async function spin() {
 canvas.addEventListener("transitionend", showPrize);
 
 function showPrize() {
-  document.getElementById("prize").textContent = prizeObj.title;
+  const {id, type, title } = prizeObj;
+  let text = ''
+  if(type === 0 ) {
+
+    text = `Better luck next time ! Share it with your friend to Get another chance.`
+
+  }
+  else if(type === 1) {
+    text = `You have ${title} GEMS in your DESTINY`
+  }
+  else if(type === 2) {
+    text = `You have 1 coupon ${title} in your DESTINY`
+  }
+
+  document.getElementById("prize").textContent = text;
 
   setTimeout(() => {
     document.getElementById("show-prize").classList.add("overlay-pop-up");
