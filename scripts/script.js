@@ -122,20 +122,22 @@ async function init() {
   (function () {
     let loaded = 0;
 
-    function onLoad() {
-      loaded++;
-      if (loaded == wheel_prize_list.length) {
-        //start laoding canvas after all images have been loaded
-        start();
-      }
-    }
+    
 
     //loop through all images and load them before painting them in canvas
     for (let i = 0; i < wheel_prize_list.length; i++) {
       let img = new Image();
-      img.addEventListener("load", onLoad);
       img.src = wheel_prize_list[i].icon;
-      img.onload = imgArr.push(img);
+      img.addEventListener("load", function () {
+        loaded++;
+        imgArr.push(img);
+        
+        if (loaded == wheel_prize_list.length) {
+          //start laoding canvas after all images have been loaded
+          start();
+        }
+      });
+      
     }
   })(wheel_prize_list, start);
 
