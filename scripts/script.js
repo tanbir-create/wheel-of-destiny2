@@ -1,7 +1,8 @@
  //start spin button
 const startBtn = document.getElementById("start");
-const WHEEL_PRIZE_LIST_API = `https://api.guruji.app/Solar/Wheel/wheel_prize_list?user_id=1&rand_num=8`;
-const WHEEL_LOTTERY_START_API = `https://api.guruji.app/Solar/Wheel/wheel_lottery_start?user_id=8`;
+let userId = window.location.href.split('?')[1].split('=')[1];
+const WHEEL_PRIZE_LIST_API = `https://api.guruji.app/Solar/Wheel/wheel_prize_list?user_id=${userId}`;
+const WHEEL_LOTTERY_START_API = `https://api.guruji.app/Solar/Wheel/wheel_lottery_start?user_id=${userId}`;
 
 //rules button, on click open rules page
 const rulesBtn = document.getElementById("rules-opener");
