@@ -1,8 +1,12 @@
  //start spin button
 const startBtn = document.getElementById("start");
-let userId = window.location.href.split('?')[1].split('=')[1];
-const WHEEL_PRIZE_LIST_API = `https://api.guruji.app/Solar/Wheel/wheel_prize_list?user_id=${userId}`;
-const WHEEL_LOTTERY_START_API = `https://api.guruji.app/Solar/Wheel/wheel_lottery_start?user_id=${userId}`;
+// let params = {};
+// location.search.substring(1).split("&").forEach(function(item) {params[item.split("=")[0]] = item.split("=")[1]})
+
+
+let params = location.search.substring(1);
+let WHEEL_PRIZE_LIST_API = `https://api.guruji.app/Solar/Wheel/wheel_prize_list?${params}`;
+let WHEEL_LOTTERY_START_API = `https://api.guruji.app/Solar/Wheel/wheel_lottery_start?${params}`;
 
 //rules button, on click open rules page
 const rulesBtn = document.getElementById("rules-opener");
