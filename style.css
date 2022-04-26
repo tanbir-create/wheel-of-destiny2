@@ -867,18 +867,24 @@ button img {
 }
 
 #try-now-btn {
+  border: 1px solid #484848;
+  border-radius: 8px;
+  margin-top: 1rem;
   font-size: 15px;
-  border: 0;
   background-color: transparent;
-  text-decoration: underline;
+  padding: 1rem;
+  width: 90%;
+
 }
 
 #claim-now {
-  border: 1px solid #222222;
+  border: 0;
   width: 90%;
-  background-color: transparent;
-  border-radius: 12px;
+  background-color: #965EFB;
+  border-radius: 8px;
   padding: 1rem;
   margin-top: 2rem;
+  color: white;
+  font-size: 15px;
 }
 
