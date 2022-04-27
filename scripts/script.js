@@ -120,31 +120,39 @@ async function init() {
 
   //IIFE to load images and start loading canvas
   (function () {
-    let loaded = 0;
-
-    
+   
 
     //loop through all images and load them before painting them in canvas
     for (let i = 0; i < wheel_prize_list.length; i++) {
-      let img = new Image();
+      const img = new Image();
       img.src = wheel_prize_list[i].icon;
-      img.addEventListener("load", function () {
-        loaded++;
-        imgArr.push(img);
-        
-        if (loaded == wheel_prize_list.length) {
-          //start laoding canvas after all images have been loaded
-          start();
-        }
-      });
+      imgArr.push(img);
+      
       
     }
+
+    loadImages(imgArr)
+    
+    
   })(wheel_prize_list, start);
 
  
   loadWheelLotteryList(wheel_lottery_list);
 
 }
+
+function loadImages(imgArr) {
+  let loaded = 0;
+  for(let i= 0; i<imgArr.length; i++){
+    imgArr[i].addEventListener('load', function() {
+      loaded++;
+      if(loaded === imgArr.length){
+        start()
+      }
+    })
+  }
+}
+
 
 let slideUpInPixels = 19.6;
 let first = 2, second = 3, third = 4;
@@ -249,7 +257,7 @@ function start() {
       w = true;
     }
 
-    
+   
     drawBlade(
       imgArr[i],
       text,
