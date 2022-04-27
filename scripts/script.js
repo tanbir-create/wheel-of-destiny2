@@ -143,14 +143,16 @@ async function init() {
 
 function loadImages(imgArr) {
   let loaded = 0;
+  
   for(let i= 0; i<imgArr.length; i++){
     imgArr[i].addEventListener('load', function() {
       loaded++;
-      if(loaded === imgArr.length){
+      if(loaded === imgArr.length){ 
         start()
       }
     })
   }
+  
 }
 
 
@@ -257,7 +259,7 @@ function start() {
       w = true;
     }
 
-   
+    
     drawBlade(
       imgArr[i],
       text,
@@ -269,8 +271,8 @@ function start() {
       i,
       currBg,
       currFont
-    );
-  }
+      );
+    }
 }
 
 
@@ -427,6 +429,14 @@ const leaveDiv = document.getElementById("leave-div");
 
 document.getElementById("back-btn").addEventListener("click", function () {
   leaveDiv.classList.add("overlay-pop-up");
+});
+
+$(window).on("navigate", function (event, data) {
+  var direction = data.state.direction;
+  if (direction == 'back') {
+    leaveDiv.classList.add("overlay-pop-up");
+  }
+  
 });
 
 
