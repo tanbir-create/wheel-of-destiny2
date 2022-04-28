@@ -882,3 +882,44 @@ button img {
   font-size: 15px;
 }
 
+
+#toast {
+  position: absolute;
+  width: 80%;
+  padding: 1rem;
+  top: -18%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #965EFB;
+  color: white;
+  opacity: 0;
+  z-index: 14;
+  border-radius: 5px;
+  text-align: center;
+}
+
+#toast.show {
+  animation: fadeIn .5s forwards, fadeOut .5s 2.5s;
+}
+
+@keyframes fadeIn {
+  0%{
+    top: -18%;
+    opcaity: 0; 
+  }
+  100% {
+    top: 18%;
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from{
+    opacity: 1;
+  }
+  to{
+    opacity: 0;
+  }
+}
+
+

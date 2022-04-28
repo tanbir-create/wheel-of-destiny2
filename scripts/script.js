@@ -82,14 +82,22 @@ const chances = document.getElementById("chances");
 const gems_won = document.getElementById("gems-won");
 const coupons_won = document.getElementById("coupons-won");
 
+const toast = $('#toast');
 
 //entry point
 document.addEventListener("DOMContentLoaded", init);
 
 
 async function init() {
+  
   const res = await fetch(WHEEL_PRIZE_LIST_API);
   const resJson = await res.json();
+
+  if(resJson.data.code !== 0) {
+    toast.text(resJson.data.msg);
+    toast.addClass('show');
+    setTimeout(function(){ toast.removeClass('show') }, 3000);
+  }
 
   wheel_prize_list = resJson.data.wheel_prize_list;
   wheel_lottery_list = resJson.data.wheel_lottery_list;
@@ -383,6 +391,11 @@ async function spin() {
   //fetch user's lottery result
   const res = await fetch(WHEEL_LOTTERY_START_API);
   const resJson = await res.json();
+  if(resJson.data.code !== 0) {
+    toast.text(resJson.data.msg);
+    toast.addClass('show');
+    setTimeout(function(){ toast.removeClass('show') }, 3000);
+  }
 
   let spinResult = resJson.data.wheel_prize_info;
 
@@ -430,15 +443,6 @@ const leaveDiv = document.getElementById("leave-div");
 document.getElementById("back-btn").addEventListener("click", function () {
   leaveDiv.classList.add("overlay-pop-up");
 });
-
-$(window).on("navigate", function (event, data) {
-  var direction = data.state.direction;
-  if (direction == 'back') {
-    leaveDiv.classList.add("overlay-pop-up");
-  }
-  
-});
-
 
 //if they press claim now remove the leave div and show the wheel page again
 const claimNowBtn = document.getElementById("claim-now");
