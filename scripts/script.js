@@ -1,5 +1,6 @@
  //start spin button
 const startBtn = document.getElementById("start");
+const spinBtn =  document.getElementById("spin");
 // let params = {};
 // location.search.substring(1).split("&").forEach(function(item) {params[item.split("=")[0]] = item.split("=")[1]})
 
@@ -47,8 +48,8 @@ canvas.style.height = "100%";
 
 //for text clarity
 window.innerHeight < 800
-  ? (window.devicePixelRatio = 1.95)
-  : (window.devicePixelRatio = 1.75);
+  ? (window.devicePixelRatio = 2.1)
+  : (window.devicePixelRatio = 1.7);
 const scale = window.devicePixelRatio;
 canvas.width = Math.floor(canvas.offsetWidth * scale);
 canvas.height = Math.floor(canvas.offsetHeight * scale);
@@ -103,11 +104,18 @@ async function init() {
   wheel_lottery_list = resJson.data.wheel_lottery_list;
   user_prize_info = resJson.data.user_prize_info;
 
+
+ 
   const { times, gem_total, coupon_num } = user_prize_info;
 
 
   //if the user has spins left then let them spin the wheel by adding event listener to button
+  
+  
+
+
   if (times > 0) {
+    spinBtn.addEventListener("click", spin);
     startBtn.addEventListener("click", spin);
   } else {
     //add share logic here and add startBtn text 'Shared! know your destiny now ' after the user shared 
@@ -117,9 +125,15 @@ async function init() {
 
 
   //change text for the avaiable prizes and times left
-  chances.innerText = times + " times";
-  gems_won.innerText = gem_total + " Gems";
-  coupons_won.innerText = coupon_num + " Coupons";
+  chances.innerText = times + " spins";
+  
+  const haveWon = document.getElementById('have-won');
+  if(gem_total >0 && coupon_num>0) {
+    gems_won.innerText = gem_total + " Gems";
+    coupons_won.innerText = coupon_num + " Coupons";
+  }else{
+    haveWon.innerText = 'Invite your friends and get more spins for both of you'
+  }
 
   //set sector length according to the wheel prize list length to set how many blades to draw in canvas
   sectorLength = wheel_prize_list.length;
@@ -322,10 +336,10 @@ function drawBlade(
   ctx.fillStyle = fontColor;
 
   //if mobile screen smaller than 800px then change text font size
-  ctx.font = ctx.font.replace(
+  ctx.font = `bold ${ctx.font.replace(
     /\d+px/,
-    `${window.innerHeight > 800 ? "26px" : "22px"}`
-  );
+    `${window.innerHeight > 800 ? "29px" : "26px"}`
+  )}`;
 
   ctx.shadowColor = "black";
   ctx.strokeStyle = "rgba(0,0,0,1)";
@@ -385,10 +399,11 @@ let prizeObj = {};
 async function spin() {
   //remove event listener so that user doesnt spin the wheel while its spinning
   audio.play();
+  spinBtn.removeEventListener("click", spin);
 
   startBtn.removeEventListener("click", spin);
 
-  //fetch user's lottery result
+  // fetch user's lottery result
   const res = await fetch(WHEEL_LOTTERY_START_API);
   const resJson = await res.json();
   if(resJson.data.code !== 0) {
@@ -398,6 +413,7 @@ async function spin() {
   }
 
   let spinResult = resJson.data.wheel_prize_info;
+
 
   prizeObj = spinResult;
 
@@ -415,7 +431,9 @@ async function spin() {
 canvas.addEventListener("transitionend", showPrize);
 
 function showPrize() {
-  const {id, type, title } = prizeObj;
+  
+  const {id, type, title} = prizeObj;
+
   let text = ''
   if(type === 0 ) {
 
@@ -462,6 +480,18 @@ function closePrize(e) {
     return;
   }
   window.location.reload();
+}
+
+
+const showPrizeDiv = $('#show-prize')
+$(showPrizeDiv).click(closePrizeWithClickAnywhere);
+function closePrizeWithClickAnywhere(e) {
+  
+  if(e.target !== this) {
+    return;
+  }
+  window.location.reload();
+  
 }
 
 function closeNav2() {

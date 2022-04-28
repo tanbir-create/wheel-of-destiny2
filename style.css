@@ -134,7 +134,10 @@ button img {
 
 #heading {
   position: absolute;
-  top: 4%;
+  top: 11%;
+  width: 90%;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 #heading img {
@@ -216,7 +219,6 @@ button img {
 #spin {
   font: 1.5em/0 sans-serif;
   user-select: none;
-  cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -497,7 +499,7 @@ button img {
   bottom: 13.5%;
   left: 50%;
   transform: translateX(-50%);
-  height: 60px;
+  
   width: 80%;
   background-color:  rgba(75, 9, 145, .1);
   border-radius: 50px;
@@ -546,7 +548,7 @@ button img {
   border: none;
 
   font-weight: 600;
-  font-size: 14px;
+  font-size: 18px;
   line-height: 140%;
   color: #3c0d9c;
   padding: 0.15rem 0.5rem;
@@ -562,14 +564,15 @@ button img {
   height: 100%;
   width: 100%;
   position: fixed;
-  transform: translateY(100%);
-  z-index: 8;
+  /* transform: translateY(100%); */
+  z-index: -9;
   bottom: 0;
   left: 0;
+  /* transform: translate(-50%, -50%); */
 
   background-color: rgba(17, 0, 40, 0.85);
   overflow: hidden;
-  /* transition: 0.25s; */
+  /* transition: 0.1s; */
 }
 
 .overlay-content {
@@ -596,13 +599,13 @@ button img {
   left: 50%;
   transform: translate(-50%, -50%);
   height: 55%;
-  width: 85%;
+    width: 85%;
   text-align: center;
   display: flex;
   
   justify-content: center;
   align-items: center;
-  
+ 
   border-radius: 28px;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 15px 30px -25px inset, rgba(0, 0, 0, 0.3) 0px 24px 50px -15px inset;
   
@@ -674,35 +677,29 @@ button img {
   background-color: #ffffff;
   background-image: none;
   border: 0;
-}
+}  
 
 
 
 .overlay-pop-up {
-  animation: popUp ease-in-out 0.5s forwards;
+  animation: popUp ease-in 0.4s forwards; 
 }
 
 @keyframes popUp {
   0% {
-    transform: translateY(100%);
+    transform: scale(0); 
+    z-index: -9;
   }
-
-  75% {
-    transform: translateY(-25px);
+  88% {  
+    transform: scale(1.06);
+    z-index: 9;
   }
-  95% {
-    transform: translateY(12.5px);
-  }
-
   100% {
-    transform: translateY(0);
+    transform: scale(1);
+    z-index: 9;
   }
 }
 
-/* .overlay-hide {
-      transition: transform ease-in-out .5s;
-      transform: translateY(100%);
-  } */
 
 .overlay-content p {
   font-weight: 600;
@@ -720,13 +717,15 @@ button img {
 
 .side-lights-bar1 {
   height: 15px;
-  width: 100%;
+  
   position: absolute;
-  top: 3px;
+  top: .5%;
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 15px;
+  gap: 30px;
+
+  
   
   
   /* background-color: transparent; */
@@ -735,31 +734,32 @@ button img {
 
 .side-lights-bar4 {
   height: 15px;
-  width: 100%;
+  
   position: absolute;
   bottom: 3px;
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 15px;
+  gap: 30px;
+ 
 }
 
 .side-lights-bar2 {
-  /* transform: rotate(90deg); */
+  
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 30px;
   position: absolute;
   left: 3px;
   width: 10px;  
-  
+ 
 }
 
 .side-lights-bar3 {
   /* transform: rotate(90deg); */
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 30px;
   position: absolute;
   right: 3px;
   width: 10px;  
@@ -772,6 +772,57 @@ button img {
               0 0 20px #fff,
               0 0 30px #fff;
   border-radius: 50%;
+}
+
+.side-bars div:nth-child(odd) {
+  
+  box-shadow: 0 0 10px #fff;
+              
+  border-radius: 50%;
+  animation: blink .8s ease infinite;
+}
+
+.side-bars div:nth-child(even) {
+  
+ box-shadow: 0 0 10px #fff,
+  0 0 20px #fff,
+  0 0 30px #fff;
+              
+  border-radius: 50%;
+  animation: blink2 .8s ease infinite;
+  
+}
+
+
+@keyframes blink {
+  0% {
+    box-shadow: 0 0 10px #fff;
+  }
+  50%{
+    box-shadow: 0 0 10px #fff,
+    0 0 20px #fff,
+    0 0 30px #fff;
+  }
+  100%{
+    box-shadow: 0 0 10px #fff;
+  }
+}
+
+@keyframes blink2 {
+  0% {
+    box-shadow: 0 0 10px #fff,
+    0 0 20px #fff,
+    0 0 30px #fff;
+  }
+  50%{
+    
+    box-shadow: 0 0 10px #fff;
+  }
+  100%{
+    box-shadow: 0 0 10px #fff,
+    0 0 20px #fff,
+    0 0 30px #fff;
+  }
 }
 
 
@@ -816,13 +867,13 @@ button img {
 
 .close-btn {
   position: absolute;
-  bottom: 13%;
+  bottom: 14%;
   left: 50%;
   transform: translateX(-50%);
   background-color: transparent;
   border: 0;
-  height: 55px;
-  width: 55px;
+  height: 40px;
+  width: 40px;
 }
 
 .close-btn img {
@@ -864,7 +915,7 @@ button img {
   border: 1px solid #484848;
   border-radius: 8px;
   margin-top: 1rem;
-  font-size: 15px;
+  font-size: 16px;
   background-color: transparent;
   padding: 1rem;
   width: 90%;
@@ -879,7 +930,7 @@ button img {
   padding: 1rem;
   margin-top: 2rem;
   color: white;
-  font-size: 15px;
+  font-size: 16px;
 }
 
 
