@@ -185,8 +185,7 @@ let first = 2, second = 3, third = 4;
 function loadWheelLotteryList(wheel_lottery_list) {
 
   //load 90 elements from prizelist inside prize winners div
-  const length = wheel_lottery_list.length;
-
+  const length = wheel_lottery_list.length > 100 ? 100 : wheel_lottery_list.length;
   const prizeDiv = document.getElementById('prize-wrap');
 
   let fragment = document.createDocumentFragment();

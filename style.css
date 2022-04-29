@@ -134,7 +134,7 @@ button img {
 
 #heading {
   position: absolute;
-  top: 11%;
+  top: 75px;
   width: 90%;
   left: 50%;
   transform: translateX(-50%);
@@ -162,7 +162,7 @@ button img {
 #prize-winners {
 
   position: absolute;
-  top: 18%;
+  top: calc(11% + 52px);
   left: 50%;
   transform: translateX(-50%);
   width: 80%;
@@ -572,6 +572,7 @@ button img {
 
   background-color: rgba(17, 0, 40, 0.85);
   overflow: hidden;
+  visibility: hidden;
   /* transition: 0.1s; */
 }
 
@@ -682,21 +683,25 @@ button img {
 
 
 .overlay-pop-up {
-  animation: popUp ease-in 0.4s forwards; 
+  animation: popUp ease 0.4s forwards; 
 }
 
 @keyframes popUp {
   0% {
     transform: scale(0); 
     z-index: -9;
+    visibility: hidden;
   }
   88% {  
     transform: scale(1.06);
     z-index: 9;
+    visibility: visible;
   }
   100% {
     transform: scale(1);
     z-index: 9;
+    visibility: visible;
+
   }
 }
 
