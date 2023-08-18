@@ -6,8 +6,8 @@ const spinBtn =  document.getElementById("spin");
 
 
 let params = location.search.substring(1);
-let WHEEL_PRIZE_LIST_API = `https://api.guruji.app/Solar/Wheel/wheel_prize_list?${params}`;
-let WHEEL_LOTTERY_START_API = `https://api.guruji.app/Solar/Wheel/wheel_lottery_start?${params}`;
+let WHEEL_PRIZE_LIST_API = `/api/Wheel/wheel_prize_list?${params}`;
+let WHEEL_LOTTERY_START_API = `/api/Wheel/wheel_lottery_start?${params}`;
 
 //rules button, on click open rules page
 const rulesBtn = document.getElementById("rules-opener");
